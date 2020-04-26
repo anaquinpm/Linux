@@ -10,9 +10,11 @@ Los local __unit-files__ y customizaciones pueden ponerse en el "/etc/systemd/sy
 
 ## Systemctl
 Es el manejador de Systemd
-    $ systemctl     ## autmaticamente invoca el subcomando "list-units"
-    $ systemctl list-units --type=service --state=running 
-    $ systemctl list-unit-files     ## listamos los archivos de configuración que tenemos en el Systemd
+```Bash
+$ systemctl                     ## autmaticamente invoca el subcomando "list-units"
+$ systemctl list-units --type=service --state=running 
+$ systemctl list-unit-files     ## listamos los archivos de configuración que tenemos en el Systemd
+```
 
 ## Status unit
 **Enabled/Disabled** es para las _unit-files_ que estan en el directorio del sistema de systemd.
@@ -20,9 +22,10 @@ Es el manejador de Systemd
 **Static** son las que no tienen proceso de instalación por lo que no pueden estar "_enabled|disabled_". Solo se activan a mano (start) o si es dependencia de otra unidad.
 
 **masked** bloqueadas para administrar.
-
-    $ system disable [unit_name] //para aquellas que tienen estado "enabled|linked"
-    $ system mask [unit_name] //para aquellas que tienen estado "static"
+```Bash
+$ system disable [unit_name]  # para aquellas que tienen estado "enabled|linked"
+$ system mask [unit_name]     # para aquellas que tienen estado "static"
+```
 
 ## Targets
 Este tipo de unidad son marcadores conocidos para indicar un modo de operación, serian como los "init run levels" del 0-6.
@@ -33,10 +36,10 @@ Este tipo de unidad son marcadores conocidos para indicar un modo de operación,
 * 3 - **multi-user.target** -> Multiuser mode with networking.
 * 5 - **graphical.target** -> Multiuser mode with networking and GUI.
 * 6 - **reboot.target** -> System reboot.
-```
-$ sudo systemctl isolate multiuser.target   //activa el target y sus dependencias.
-$ systemctl get-gefault   // indica el target que inica como default el OS
-$ sudo systemctl set-dafault multiuser.target   // cambiar el modo por default en que inicia el OS
+```Bash
+$ sudo systemctl isolate multiuser.target       # activa el target y sus dependencias.
+$ systemctl get-gefault                         # indica el target que inica como default el OS
+$ sudo systemctl set-dafault multiuser.target   # cambiar el modo por default en que inicia el OS
 ```
 
 ## Dependencias entre unidades
@@ -86,8 +89,8 @@ Podemos configurar _journald_ para mantener mensajes de boots anteriores, modifi
 
     [Journal]
     Storage=persistent
-```
-    $ journalctl --list-boots
-    $ journalctl -b -1        //podemos acceder a los mensajes refiriendonos a su index o ID
-    $ journalctl -u ntp       //log de una "unit" específica
+```Bash
+$ journalctl --list-boots
+$ journalctl -b -1        # podemos acceder a los mensajes refiriendonos a su index o ID
+$ journalctl -u ntp       # log de una "unit" específica
 ```
