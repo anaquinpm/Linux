@@ -1,32 +1,35 @@
 # Configurar SSH
 
 ```bash
-$ sudo apt install openssh-client
-$ ll ~/.ssh    # Verificar si hay claves en nuestro equipo (publica/privada)
-$ ssh-keygen -t rsa -b 4096 -C "miEmail@example.com"    # passphrase -->segundo factor de verificación
+sudo apt install openssh-client
+ll ~/.ssh    # Verificar si hay claves en nuestro equipo (publica/privada)
+ssh-keygen -t rsa -b 4096 -C "miEmail@example.com"    # passphrase -->segundo factor de verificación
 
 ## Verificamos que el ssh-agent este corriendo 
-$ eval "$(ssh-agent -s)"    # -> agent pid 50566
-$ ssh-add ~/.ssh/id_rsa     # Agregar clave privada SSH al ssh-agent
-$ ssh usuario@ip_srv mkdir -p .ssh    # Crear directorio .ssh en el home del usuario en el servidor
+eval "$(ssh-agent -s)"    # -> agent pid <num_process>
+ssh-add [-c] ~/.ssh/id_rsa     # Agregar clave privada SSH al ssh-agent, [-c] fuerza entrar con la frase privada
+
+ssh usuario@ip_srv mkdir -p .ssh    # Crear directorio .ssh en el home del usuario en el servidor
 
 ## Copiar llave publica al servidor (2 Métodos)
-- $ cat ~/.ssh/id_rsa.pub|ssh usuario@ip_srv "cat >> ~/.ssh/authorized_keys"
-  - $ chmod 600 authorized_keys  # cambiar permisos del archivo si es necesario
 
-- $ ssh-copy-id usuario@ip_srv
+```bash
+cat ~/.ssh/id_rsa.pub|ssh usuario@ip_srv "cat >> ~/.ssh/authorized_keys"
+  chmod 600 authorized_keys  # cambiar permisos del archivo si es necesario
+
+ssh-copy-id usuario@ip_srv
 ```
 
 ## Especificar la llave a utilizar dependiendo el Servicio (ej: EC2 de amazon)
 
-> $ ssh -i .ssh/mykey.pem ubuntu@10.0.3.142    # .ssh/mykey.pem es la llave
+> ssh -i .ssh/mykey.pem ubuntu@10.0.3.142    # .ssh/mykey.pem es la llave
 
 ## Fedora /RHEL
 
 ```bash
 sudo dnf install openssh-server openssh-client -y
 sudo service sshd start    #iniciamos el servicio
-  $ sudo chkconfig --level 235 sshd on    # Para que corra en el inicio del sistema
+  sudo chkconfig --level 235 sshd on    # Para que corra en el inicio del sistema
 sudo service sshd restart
 ```
 

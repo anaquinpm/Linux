@@ -3,7 +3,10 @@
 ## Commands
 
 ````bash
-iptables -L       # check firewall (es local)
+# firewalls 
+iptables -L       # check firewall
+  firewall-cmd --list-all # RHEL (firewalld)
+  ufw status      # Ubuntu
 tcpdump
 # app layer
 dig
