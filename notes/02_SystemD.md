@@ -65,6 +65,8 @@ Wans y Requires pueden extender creando un archivo unit-file.wants o unit-file.r
 - **Manualmente** -> $ sudo systemctl add-wants multiuser.target my-local.service
 - **Automaticamente** -> seteando la sección **[install]** del _unit-file_, las opciones _WantedBy_ y _RequieredBy_, las cuales se leen solamete cuando activamos o desactivamos una unidad mediante _$ systemctl enable|disable_.
 
+> systemctl list-dependencies                   # dependencias entre servicios
+
 ## Orden de ejecución
 
 Cuando el systema tienen una transición a un nuevo estado, determina mediante las opciones **After** y **Before** como ejecutar las units. De tal manera aquellos que no tengan esta opción las tomará que pueden ejecutarce en parelo.

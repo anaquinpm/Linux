@@ -8,5 +8,8 @@
   - [IP Tables](./notes/security/iptables.md)
 - [Networing CMDs](notes/networking-cmd.md)
 - [Sistemd](notes/02_SystemD.md)
-- [Grub & Kernel](notes/20230226204406-grub-kernel-boot.md)
+- [Grub & Kernel](notes/grub-kernel-boot.md)
+- Tools
+  - [Ansible](./notes/tools/ansible/ansible.md)
 - [My packages](notes/linux-install.md)
+- [kernel](./notes/kernel.md)

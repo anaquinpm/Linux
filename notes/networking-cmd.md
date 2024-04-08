@@ -52,8 +52,9 @@ sudo apt install apache2-utils
 $ echo 1 > /proc/sys/net/ipv4/ip_forward     # valor por default es 0 -> cat /proc/sys/net/ipv4/ip_forward
     Para que sea permanente el cambio debe hacerce en el arch /etc/sysctl.conf
 
-## --- Netstat ---
+## --- Netstat/ss ---
 $ netstat -ltupn      # -l listen ; -t TCP ; -u UDP ; a UDP,TCP y más; -n numeric port ; -p aplication name port
+  ss -lpt
 $ netstat -st            # -s Stadisticas ; -t TCP ; -U UDP tar
 $ netstat -r            #  Display kernel ip routing table
 $ netstat -i            # show Interfaces. Include transfer and reciver packets with MTU

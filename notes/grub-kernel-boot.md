@@ -17,6 +17,29 @@ vim /etc/default/grub -> GRUB_DEFAULT=0
 reboot
 ```
 
+## Troubleshoot
+
+```bash
+# when we mount over a media, detects in rescur mode a mount point for de FS
+chroot  </mnt/sysroot/> 
+grub2-install <disk>          # BIOS install
+yum reinstall grub2-efishim   # UEFI install
+grub2-mkconfig                # grub configuration
+  grub2-mkconfig -o /boot/grub2/grb.conf
+```
+
+### get root permission with "rd-break" grub
+
+- Power on the server.At the group section pres "e" letter
+- Navegate up to the first line with "linux ($root) -> at the end add "rd.break" option and press "CTRL+x" to start
+
+```bash
+mount -o remount,rw /sysroot/
+chroot /sysroot/
+passwd
+load_policy -i && restorecon -Rv /etc/
+```
+
 ## Referencias
 
 - [Linux-generic package](https://packages.ubuntu.com/search?suite=all&arch=amd64&searchon=names&keywords=linux-generic)
